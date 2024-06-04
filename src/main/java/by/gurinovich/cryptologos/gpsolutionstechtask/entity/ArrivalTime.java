@@ -1,9 +1,11 @@
 package by.gurinovich.cryptologos.gpsolutionstechtask.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.sql.Time;
 
+@Data
 @Entity
 @Table(name = "arrival_times")
 public class ArrivalTime {

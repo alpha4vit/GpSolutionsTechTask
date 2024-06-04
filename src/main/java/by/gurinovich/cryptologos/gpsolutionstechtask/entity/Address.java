@@ -32,6 +32,6 @@ public class Address {
     private List<Hotel> hotels;
 
     public String getShortAddress(){
-        return String.format("%s, %s, %s, %s", street, city, postCode, country.getName());
+        return String.format("%s %s, %s, %s, %s", houseNumber, street, city, postCode, country.getName());
     }
 }

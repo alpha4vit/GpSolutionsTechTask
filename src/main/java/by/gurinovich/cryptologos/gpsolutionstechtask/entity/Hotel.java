@@ -34,7 +34,7 @@ public class Hotel {
     @JoinColumn(name = "arrival_time_id", referencedColumnName = "id")
     private ArrivalTime arrivalTime;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "hotels")
     private List<Amenity> amenities;
 
 }

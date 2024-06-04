@@ -6,10 +6,10 @@ spring:
   application:
     name: GpSolutionsTechTask
   datasource:
-    url: jdbc:h2:mem:gptechtask
-    username: admin
+    url: jdbc:postgresql://localhost:5432/gptechtask
+    username: postgres
     password: root
-    driver-class-name: org.h2.Driver
+    driver-class-name: org.postgresql.Driver
   h2:
     console:
       enabled: true

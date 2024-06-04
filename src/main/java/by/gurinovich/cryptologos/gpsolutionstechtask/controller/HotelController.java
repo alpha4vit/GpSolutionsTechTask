@@ -22,12 +22,12 @@ public class HotelController {
     @GetMapping("/hotels")
     public ResponseEntity<List<HotelSummaryDTO>> getHotels(){
         var hotels = hotelService.getAll();
-        return ResponseEntity.ok(hotelMapper.toSummaryDTOs(hotels)); //TODO
+        return ResponseEntity.ok(hotelMapper.toSummaryDTOs(hotels));
     }
 
     @GetMapping("/hotels/{id}")
     public ResponseEntity<HotelDTO> getHotelById(@PathVariable("id") Long id){
         var hotel = hotelService.getById(id);
-        return ResponseEntity.ok(null); //TODO
+        return ResponseEntity.ok(hotelMapper.toDTO(hotel));
     }
 }
