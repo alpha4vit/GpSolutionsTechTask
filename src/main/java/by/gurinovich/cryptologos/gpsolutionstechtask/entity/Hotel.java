@@ -1,6 +1,5 @@
 package by.gurinovich.cryptologos.gpsolutionstechtask.entity;
 
-import by.gurinovich.cryptologos.gpsolutionstechtask.model.Contacts;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -27,8 +26,9 @@ public class Hotel {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    @Embedded
-    private Contacts contacts;
+    private String phone;
+
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "arrival_time_id", referencedColumnName = "id")

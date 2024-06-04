@@ -5,3 +5,14 @@ server:
 spring:
   application:
     name: GpSolutionsTechTask
+  datasource:
+    url: jdbc:h2:mem:gptechtask
+    username: admin
+    password: root
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+  liquibase:
+    enabled: true
+    default-schema: public

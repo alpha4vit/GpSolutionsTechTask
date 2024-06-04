@@ -24,4 +24,11 @@ public class Amenity {
     )
     private List<Hotel> hotels;
 
+    public Amenity() {
+    }
+
+    public Amenity(String name) {
+        this.name = name;
+    }
+
 }

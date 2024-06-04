@@ -14,16 +14,24 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String country;
+    @ManyToOne
+    @JoinColumn(name = "country_id", referencedColumnName = "id")
+    private Country country;
 
     private String city;
 
     private String street;
 
+    @Column(name = "house_number")
     private String houseNumber;
 
+    @Column(name = "post_code")
     private String postCode;
 
-    @OneToMany(mappedBy = "address")
+    @OneToMany
     private List<Hotel> hotels;
+
+    public String getShortAddress(){
+        return String.format("%s, %s, %s, %s", street, city, postCode, country.getName());
+    }
 }

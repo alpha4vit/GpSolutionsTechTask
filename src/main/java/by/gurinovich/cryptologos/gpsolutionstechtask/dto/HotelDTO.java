@@ -1,4 +1,14 @@
 package by.gurinovich.cryptologos.gpsolutionstechtask.dto;
 
-public record HotelDTO() {
+import java.util.List;
+
+public record HotelDTO(
+        Long id,
+        String name,
+        String brand,
+        AddressDTO address,
+        ContactsDTO contacts,
+        ArrivalTimeDTO arrivalTime,
+        List<String> amenities
+) {
 }
