@@ -2,6 +2,9 @@ package by.gurinovich.cryptologos.gpsolutionstechtask.service.impl;
 
 import by.gurinovich.cryptologos.gpsolutionstechtask.entity.Hotel;
 import by.gurinovich.cryptologos.gpsolutionstechtask.repository.HotelRepository;
+import by.gurinovich.cryptologos.gpsolutionstechtask.service.AddressService;
+import by.gurinovich.cryptologos.gpsolutionstechtask.service.ArrivalTimeService;
+import by.gurinovich.cryptologos.gpsolutionstechtask.service.BrandService;
 import by.gurinovich.cryptologos.gpsolutionstechtask.service.HotelService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +17,9 @@ import java.util.List;
 public class HotelServiceImpl implements HotelService {
 
     private final HotelRepository hotelRepository;
-
+    private final ArrivalTimeService arrivalTimeService;
+    private final BrandService brandService;
+    private final AddressService addressService;
 
     @Override
     public List<Hotel> getAll() {
@@ -29,6 +34,9 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Hotel save(Hotel hotel) {
-        return hotelRepository.save(hotel); //TODO
+        hotel.setArrivalTime(arrivalTimeService.getOrSave(hotel.getArrivalTime()));
+        hotel.setBrand(brandService.getOrSave(hotel.getBrand()));
+        hotel.setAddress(addressService.getOrSave(hotel.getAddress()));
+        return hotelRepository.save(hotel);
     }
 }

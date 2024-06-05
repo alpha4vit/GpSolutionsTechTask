@@ -1,0 +1,10 @@
+-- liquibase formatted sql
+
+--changeset roman_gurinovich:1
+ALTER TABLE hotels ALTER COLUMN description DROP NOT NULL;
+
+ALTER TABLE hotels ALTER COLUMN id RESTART WITH 2;
+ALTER TABLE addresses ALTER COLUMN id RESTART WITH 2;
+ALTER TABLE brands ALTER COLUMN id RESTART WITH 2;
+ALTER TABLE countries ALTER COLUMN id RESTART WITH 2;
+ALTER TABLE arrival_times ALTER COLUMN id RESTART WITH 2;

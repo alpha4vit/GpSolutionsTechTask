@@ -6,9 +6,7 @@ import by.gurinovich.cryptologos.gpsolutionstechtask.service.HotelService;
 import by.gurinovich.cryptologos.gpsolutionstechtask.util.mapper.HotelMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,4 +28,12 @@ public class HotelController {
         var hotel = hotelService.getById(id);
         return ResponseEntity.ok(hotelMapper.toDTO(hotel));
     }
+
+    @PostMapping("/hotels")
+    public ResponseEntity<HotelSummaryDTO> createHotel(@RequestBody HotelDTO hotelDTO){
+        var saved = hotelService.save(hotelMapper.toEntity(hotelDTO));
+        return ResponseEntity.ok(hotelMapper.toSummaryDTO(saved));
+    }
+
+
 }

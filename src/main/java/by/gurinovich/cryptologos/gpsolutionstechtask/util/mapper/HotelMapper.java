@@ -3,6 +3,7 @@ package by.gurinovich.cryptologos.gpsolutionstechtask.util.mapper;
 import by.gurinovich.cryptologos.gpsolutionstechtask.config.MapstructConfig;
 import by.gurinovich.cryptologos.gpsolutionstechtask.dto.HotelDTO;
 import by.gurinovich.cryptologos.gpsolutionstechtask.dto.HotelSummaryDTO;
+import by.gurinovich.cryptologos.gpsolutionstechtask.entity.Address;
 import by.gurinovich.cryptologos.gpsolutionstechtask.entity.Amenity;
 import by.gurinovich.cryptologos.gpsolutionstechtask.entity.Hotel;
 import org.mapstruct.InheritInverseConfiguration;
@@ -20,7 +21,7 @@ import java.util.List;
 )
 public interface HotelMapper {
 
-    @Mapping(target = "address", expression = "java(hotel.getAddress().getShortAddress())")
+
     HotelSummaryDTO toSummaryDTO(Hotel hotel);
 
     List<HotelSummaryDTO> toSummaryDTOs(List<Hotel> hotels);
@@ -28,13 +29,26 @@ public interface HotelMapper {
     @Mapping(target = "brand", source = "hotel.brand.name")
     @Mapping(target = "contacts.phone", source = "hotel.phone")
     @Mapping(target = "contacts.email", source = "hotel.email")
-    @Mapping(target = "amenities", expression = "java(hotel.getAmenities().stream().map(Amenity::getName).toList())")
     HotelDTO toDTO(Hotel hotel);
 
 
     @InheritInverseConfiguration
-    @Mapping(target = "amenities", expression = "java(hotelDTO.amenities().stream().map(Amenity::new).toList())")
     Hotel toEntity(HotelDTO hotelDTO);
 
+    default String getShortAddress(Address address){
+        return address.getShortAddress();
+    }
+
+    default List<String> mapAmenitiesToString(List<Amenity> amenities){
+        if (amenities == null)
+            return null;
+        return amenities.stream().map(Amenity::getName).toList();
+    }
+
+    default List<Amenity> mapStringsToAmenities(List<String> amenities){
+        if (amenities == null)
+            return null;
+        return amenities.stream().map(Amenity::new).toList();
+    }
 
 }

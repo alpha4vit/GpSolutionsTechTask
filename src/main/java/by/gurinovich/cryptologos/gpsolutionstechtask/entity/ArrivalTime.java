@@ -3,7 +3,7 @@ package by.gurinovich.cryptologos.gpsolutionstechtask.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 @Data
 @Entity
@@ -15,8 +15,8 @@ public class ArrivalTime {
     private Long id;
 
     @Column(name = "check_in")
-    private Time checkIn;
+    private LocalTime start;
 
     @Column(name = "check_out")
-    private Time checkOut;
+    private LocalTime end;
 }
