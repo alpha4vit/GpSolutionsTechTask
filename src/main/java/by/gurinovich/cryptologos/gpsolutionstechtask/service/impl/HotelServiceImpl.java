@@ -1,14 +1,13 @@
 package by.gurinovich.cryptologos.gpsolutionstechtask.service.impl;
 
+import by.gurinovich.cryptologos.gpsolutionstechtask.entity.Amenity;
 import by.gurinovich.cryptologos.gpsolutionstechtask.entity.Hotel;
 import by.gurinovich.cryptologos.gpsolutionstechtask.repository.HotelRepository;
-import by.gurinovich.cryptologos.gpsolutionstechtask.service.AddressService;
-import by.gurinovich.cryptologos.gpsolutionstechtask.service.ArrivalTimeService;
-import by.gurinovich.cryptologos.gpsolutionstechtask.service.BrandService;
-import by.gurinovich.cryptologos.gpsolutionstechtask.service.HotelService;
+import by.gurinovich.cryptologos.gpsolutionstechtask.service.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +19,7 @@ public class HotelServiceImpl implements HotelService {
     private final ArrivalTimeService arrivalTimeService;
     private final BrandService brandService;
     private final AddressService addressService;
+    private final AmenityService amenityService;
 
     @Override
     public List<Hotel> getAll() {
@@ -33,10 +33,23 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
+    @Transactional
     public Hotel save(Hotel hotel) {
         hotel.setArrivalTime(arrivalTimeService.getOrSave(hotel.getArrivalTime()));
         hotel.setBrand(brandService.getOrSave(hotel.getBrand()));
         hotel.setAddress(addressService.getOrSave(hotel.getAddress()));
         return hotelRepository.save(hotel);
+    }
+
+    @Override
+    @Transactional
+    public Hotel addAmenities(Long id, List<Amenity> amenities) {
+        var hotel = getById(id);
+        var saved = amenities.stream()
+                .filter(amenity -> !hotel.getAmenities().contains(amenity))
+                .peek(amenity -> amenityService.save(amenity, hotel))
+                .toList();
+        hotel.getAmenities().addAll(saved);
+        return hotel;
     }
 }

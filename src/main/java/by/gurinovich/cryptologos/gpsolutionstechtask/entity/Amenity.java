@@ -2,11 +2,15 @@ package by.gurinovich.cryptologos.gpsolutionstechtask.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "amenities")
 public class Amenity {
 
@@ -14,6 +18,7 @@ public class Amenity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @EqualsAndHashCode.Include
     private String name;
 
     @ManyToMany
@@ -24,11 +29,9 @@ public class Amenity {
     )
     private List<Hotel> hotels;
 
-    public Amenity() {
-    }
-
     public Amenity(String name) {
         this.name = name;
     }
+
 
 }

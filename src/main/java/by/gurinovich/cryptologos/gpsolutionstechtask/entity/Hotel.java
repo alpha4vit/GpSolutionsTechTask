@@ -34,7 +34,7 @@ public class Hotel {
     @JoinColumn(name = "arrival_time_id", referencedColumnName = "id")
     private ArrivalTime arrivalTime;
 
-    @ManyToMany(mappedBy = "hotels")
+    @ManyToMany(mappedBy = "hotels", fetch = FetchType.EAGER)
     private List<Amenity> amenities;
 
 }

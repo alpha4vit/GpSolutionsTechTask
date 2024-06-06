@@ -5,6 +5,7 @@ import java.util.List;
 public record HotelDTO(
         Long id,
         String name,
+        String description,
         String brand,
         AddressDTO address,
         ContactsDTO contacts,

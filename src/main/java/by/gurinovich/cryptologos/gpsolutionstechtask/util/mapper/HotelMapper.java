@@ -14,8 +14,9 @@ import java.util.List;
 
 @Mapper(config = MapstructConfig.class, 
         uses = {
-            AddressMapper.class,
-            ArrivalTimeMapper.class
+                AddressMapper.class,
+                ArrivalTimeMapper.class,
+                AmenityMapper.class
         },
         imports = Amenity.class
 )
@@ -39,16 +40,6 @@ public interface HotelMapper {
         return address.getShortAddress();
     }
 
-    default List<String> mapAmenitiesToString(List<Amenity> amenities){
-        if (amenities == null)
-            return null;
-        return amenities.stream().map(Amenity::getName).toList();
-    }
 
-    default List<Amenity> mapStringsToAmenities(List<String> amenities){
-        if (amenities == null)
-            return null;
-        return amenities.stream().map(Amenity::new).toList();
-    }
 
 }
