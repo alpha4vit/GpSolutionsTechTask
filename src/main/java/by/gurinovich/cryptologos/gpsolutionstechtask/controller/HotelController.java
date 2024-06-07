@@ -3,7 +3,7 @@ package by.gurinovich.cryptologos.gpsolutionstechtask.controller;
 import by.gurinovich.cryptologos.gpsolutionstechtask.dto.HotelDTO;
 import by.gurinovich.cryptologos.gpsolutionstechtask.dto.HotelFilterDTO;
 import by.gurinovich.cryptologos.gpsolutionstechtask.dto.HotelSummaryDTO;
-import by.gurinovich.cryptologos.gpsolutionstechtask.repository.AmenityRepository;
+import by.gurinovich.cryptologos.gpsolutionstechtask.service.HistogramService;
 import by.gurinovich.cryptologos.gpsolutionstechtask.service.HotelService;
 import by.gurinovich.cryptologos.gpsolutionstechtask.util.mapper.AmenityMapper;
 import by.gurinovich.cryptologos.gpsolutionstechtask.util.mapper.HotelMapper;
@@ -23,7 +23,7 @@ public class HotelController {
     private final HotelService hotelService;
     private final HotelMapper hotelMapper;
     private final AmenityMapper amenityMapper;
-    private final AmenityRepository amenityRepository;
+    private final HistogramService histogramService;
 
     @GetMapping("/hotels")
     public ResponseEntity<List<HotelSummaryDTO>> getHotels(){
@@ -52,9 +52,9 @@ public class HotelController {
     }
 
     @GetMapping("/histogram/{param}")
-    public ResponseEntity<Map<String, Long>> histogram(@PathVariable("param") String param){
-        var res = amenityRepository.groupAmenityByParam(param);
-        return ResponseEntity.ok(null); //TODO
+    public ResponseEntity<Map<String, String>> histogram(@PathVariable("param") String param){
+        var res = histogramService.handleRequest(param);
+        return ResponseEntity.ok(res);
     }
 
     @GetMapping("/search")
