@@ -1,7 +1,9 @@
 package by.gurinovich.cryptologos.gpsolutionstechtask.service.impl;
 
+import by.gurinovich.cryptologos.gpsolutionstechtask.dto.HotelFilterDTO;
 import by.gurinovich.cryptologos.gpsolutionstechtask.entity.Amenity;
 import by.gurinovich.cryptologos.gpsolutionstechtask.entity.Hotel;
+import by.gurinovich.cryptologos.gpsolutionstechtask.filter.HotelSpecification;
 import by.gurinovich.cryptologos.gpsolutionstechtask.repository.HotelRepository;
 import by.gurinovich.cryptologos.gpsolutionstechtask.service.*;
 import jakarta.persistence.EntityNotFoundException;
@@ -24,6 +26,12 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public List<Hotel> getAll() {
         return hotelRepository.findAll();
+    }
+
+    @Override
+    public List<Hotel> getAll(HotelFilterDTO filter) {
+        var spec = HotelSpecification.getFilterSpec(filter);
+        return hotelRepository.findAll(spec);
     }
 
     @Override

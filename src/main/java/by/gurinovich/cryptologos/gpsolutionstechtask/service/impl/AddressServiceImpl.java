@@ -17,11 +17,12 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Address getOrSave(Address address) {
         var country = countryService.getOrSave(address.getCountry());
+        address.setCountry(country);
         var check = addressRepository.findByHouseNumberAndStreetAndCityAndCountryAndPostCode(
                 address.getHouseNumber(),
                 address.getStreet(),
                 address.getCity(),
-                country,
+                address.getCountry(),
                 address.getPostCode()
         );
         return check.orElseGet(() -> addressRepository.save(address));
