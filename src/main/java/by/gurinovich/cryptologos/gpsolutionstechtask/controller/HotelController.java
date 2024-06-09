@@ -7,6 +7,7 @@ import by.gurinovich.cryptologos.gpsolutionstechtask.service.HistogramService;
 import by.gurinovich.cryptologos.gpsolutionstechtask.service.HotelService;
 import by.gurinovich.cryptologos.gpsolutionstechtask.util.mapper.AmenityMapper;
 import by.gurinovich.cryptologos.gpsolutionstechtask.util.mapper.HotelMapper;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class HotelController {
     }
 
     @PostMapping("/hotels")
-    public ResponseEntity<HotelSummaryDTO> createHotel(@RequestBody HotelDTO hotelDTO){
+    public ResponseEntity<HotelSummaryDTO> createHotel(@RequestBody @Valid HotelDTO hotelDTO){
         var saved = hotelService.save(hotelMapper.toEntity(hotelDTO));
         return ResponseEntity.ok(hotelMapper.toSummaryDTO(saved));
     }
