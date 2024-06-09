@@ -18,7 +18,7 @@ public class AddressServiceImpl implements AddressService {
     public Address getOrSave(Address address) {
         var country = countryService.getOrSave(address.getCountry());
         address.setCountry(country);
-        var check = addressRepository.findByHouseNumberAndStreetAndCityAndCountryAndPostCode(
+        var check = addressRepository.findByHouseNumberIgnoreCaseAndStreetIgnoreCaseAndCityIgnoreCaseAndCountryAndPostCodeIgnoreCase(
                 address.getHouseNumber(),
                 address.getStreet(),
                 address.getCity(),

@@ -6,7 +6,6 @@ import by.gurinovich.cryptologos.gpsolutionstechtask.repository.AmenityRepositor
 import by.gurinovich.cryptologos.gpsolutionstechtask.service.AmenityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,21 +16,17 @@ public class AmenityServiceImpl implements AmenityService {
     private final AmenityRepository amenityRepository;
 
     @Override
-    public Amenity getOrSave(Amenity amenity) {
-        var check = amenityRepository.findByName(amenity.getName());
-        return check.orElseGet(() -> amenityRepository.save(amenity));
-    }
-
-    @Override
-    @Transactional
-    public Amenity save(Amenity amenity, Hotel hotel) {
-        var check = amenityRepository.findByName(amenity.getName());
+    public Amenity getOrSave(Amenity amenity, Hotel hotel) {
+        var check = amenityRepository.findByNameIgnoreCase(amenity.getName());
         if (check.isPresent()){
             var existed = check.get();
             existed.getHotels().add(hotel);
             return existed;
         }
+        else
+            amenityRepository.save(amenity);
         amenity.setHotels(List.of(hotel));
         return amenity;
     }
+
 }

@@ -10,9 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface AmenityRepository extends JpaRepository<Amenity, Long> {
-    Optional<Amenity> findByName(String name);
+    Optional<Amenity> findByNameIgnoreCase(String name);
 
-    @Query(value = "select a.name, count(ha.hotel_id) from amenities a join hotel_amenity ha on ha.amenity_id = a.id group by ha.hotel_id, a.name", nativeQuery = true)
+    @Query(value = "select a.name, count(ha.hotel_id) from amenities a join hotel_amenity ha on ha.amenity_id = a.id group by a.name", nativeQuery = true)
     List<Object[]> groupAmenityByParam();
 
 }

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
-    Optional<Address> findByHouseNumberAndStreetAndCityAndCountryAndPostCode(
+    Optional<Address> findByHouseNumberIgnoreCaseAndStreetIgnoreCaseAndCityIgnoreCaseAndCountryAndPostCodeIgnoreCase(
             String houseNumber,
             String street,
             String city,
@@ -23,7 +23,7 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
     @Query(value = "select a.city, count(h.id) from addresses a join public.hotels h on h.address_id = a.id group by a.city", nativeQuery = true)
     List<Object[]> groupCities();
 
-    @Query(value = "select c.name, count(h.id) from addresses a join public.hotels h on h.address_id = a.id join countries c on c.id = a.country_id group by c.id", nativeQuery = true)
+    @Query(value = "select c.name, count(h.id) from addresses a join public.hotels h on h.address_id = a.id join countries c on c.id = a.country_id group by c.name", nativeQuery = true)
     List<Object[]> groupCountries();
 
 }

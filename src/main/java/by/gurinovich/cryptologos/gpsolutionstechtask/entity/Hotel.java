@@ -1,13 +1,17 @@
 package by.gurinovich.cryptologos.gpsolutionstechtask.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "hotels")
+@ToString(onlyExplicitlyIncluded = true)
 public class Hotel {
 
     @Id
@@ -31,9 +35,11 @@ public class Hotel {
     private String email;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "arrival_time_id", referencedColumnName = "id")
     private ArrivalTime arrivalTime;
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "hotels", fetch = FetchType.EAGER)
     private List<Amenity> amenities;
 

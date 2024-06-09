@@ -14,7 +14,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand getOrSave(Brand brand) {
-        var check = brandRepository.findByName(brand.getName());
+        var check = brandRepository.findByNameIgnoreCase(brand.getName());
         return check.orElseGet(() -> brandRepository.save(brand));
     }
 }

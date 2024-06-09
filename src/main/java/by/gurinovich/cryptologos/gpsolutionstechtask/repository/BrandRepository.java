@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface BrandRepository extends JpaRepository<Brand, Long> {
 
-    Optional<Brand> findByName(String name);
+    Optional<Brand> findByNameIgnoreCase(String name);
 
     @Query(value = "select b.name, count(h.id) from brands b join public.hotels h on h.brand_id = b.id group by b.name", nativeQuery = true)
     List<Object[]> groupBrands();

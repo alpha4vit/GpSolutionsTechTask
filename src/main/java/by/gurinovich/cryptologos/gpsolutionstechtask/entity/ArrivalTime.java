@@ -1,12 +1,18 @@
 package by.gurinovich.cryptologos.gpsolutionstechtask.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "arrival_times")
 public class ArrivalTime {
 

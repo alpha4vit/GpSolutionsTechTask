@@ -5,8 +5,7 @@ import by.gurinovich.cryptologos.gpsolutionstechtask.entity.Hotel;
 
 public interface AmenityService {
 
-    Amenity getOrSave(Amenity amenity);
+    Amenity getOrSave(Amenity amenity, Hotel hotel);
 
-    Amenity save(Amenity amenity, Hotel hotel);
 
 }

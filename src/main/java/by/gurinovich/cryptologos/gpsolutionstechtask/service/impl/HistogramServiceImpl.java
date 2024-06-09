@@ -26,7 +26,7 @@ public class HistogramServiceImpl implements HistogramService {
             case "city" -> getCityHistogram(param);
             case "country" -> getCountryHistogram(param);
             case "brand" -> getBrandHistogram(param);
-            case "amenity" -> getAmenityHistogram(param);
+            case "amenities" -> getAmenityHistogram(param);
             default -> throw new IllegalArgumentException("This param is not available for histogram!");
         };
     }
@@ -56,7 +56,7 @@ public class HistogramServiceImpl implements HistogramService {
     }
 
     private Map<String, String> mapObjects(List<Object[]> objects){
-        record Entry(String key, String value){};
+        record Entry(String key, String value){}
         return objects.stream()
                 .map(object -> new Entry(object[0].toString(), object[1].toString()))
                 .collect(toMap(Entry::key, Entry::value));

@@ -14,7 +14,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country getOrSave(Country country) {
-        var check = countryRepository.findByName(country.getName());
+        var check = countryRepository.findByNameIgnoreCase(country.getName());
         return check.orElseGet(() -> countryRepository.save(country));
     }
 }

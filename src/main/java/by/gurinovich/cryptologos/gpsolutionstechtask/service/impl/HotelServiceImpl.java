@@ -55,7 +55,7 @@ public class HotelServiceImpl implements HotelService {
         var hotel = getById(id);
         var saved = amenities.stream()
                 .filter(amenity -> !hotel.getAmenities().contains(amenity))
-                .peek(amenity -> amenityService.save(amenity, hotel))
+                .peek(amenity -> amenityService.getOrSave(amenity, hotel))
                 .toList();
         hotel.getAmenities().addAll(saved);
         return hotel;

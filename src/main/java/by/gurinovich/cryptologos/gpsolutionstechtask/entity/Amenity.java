@@ -1,17 +1,17 @@
 package by.gurinovich.cryptologos.gpsolutionstechtask.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@AllArgsConstructor
 @Table(name = "amenities")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Amenity {
 
     @Id
